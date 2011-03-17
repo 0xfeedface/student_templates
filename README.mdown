@@ -3,9 +3,9 @@ LaTeX Templates for Bachelor/Master Thesis
 
 Contents
 --------
-* `thesis.tex` -- LaTeX template for thesis
-* `bibliography.bib` -- example BibTeX file for creating the bibliography
+* `thesis.tex` &ndash; LaTeX template for thesis
+* `bibliography.bib` &ndash; example BibTeX file for creating the bibliography
 
 Known Issues
 ------------
-* PDF metadata contains &quot;&lt;title&gt;:&lt;subtitle&gt;, even if document doesn't use a subtitle.
+* PDF metadata contains &quot;&lt;title&gt;: &lt;subtitle&gt;&quot;, even if document doesn't use a subtitle.
