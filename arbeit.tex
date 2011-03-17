@@ -1,0 +1,310 @@
+%
+% Vorlage Diplom-/Master-/Bachelorarbeit
+% Norman Heino
+% Version: 0.1
+% Datum: 2011-03-16
+% Encoding: UTF-8
+%
+\documentclass[% 
+  parskip=half,
+  ]{scrreprt} % 11pt is default
+
+\usepackage[automark, headsepline]{scrpage2}
+\pagestyle{scrheadings}
+
+% Kolumnentitel in Serifenloser Schrift
+\renewcommand*{\headfont}{\normalfont\sffamily\slshape}
+
+% Alle Seiten sind rechte Seiten
+\refoot[\pagemark]{\pagemark}
+\rofoot[\pagemark]{\pagemark}
+\rehead[]{\headmark}
+\rohead[]{\headmark}
+\chead[]{}
+\cfoot[]{}
+
+% „--“ zwischen Kapitel und Kolumnentitel
+\renewcommand*{\chaptermarkformat}{%
+  \chapappifchapterprefix{\ }
+  \thechapter\autodot\enskip{--}\enskip%
+}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Fonts
+% Roman
+\usepackage[sc]{mathpazo}
+% Sans
+\usepackage{avant}
+% \usepackage[scaled=.95]{helvet}
+
+% Monospaced
+\usepackage[scaled=.86]{beramono}
+% Mono aus den pxfonts
+% \renewcommand{\ttdefault}{pxtt}
+% \DeclareMathAlphabet{\mathtt}{OT1}{pxtt}{m}{n}
+% \SetMathAlphabet{\mathtt}{bold}{OT1}{pxtt}{b}{n}
+
+% Support for multiple languages
+\usepackage[english, ngerman]{babel}
+
+% Non-english bibliography
+\usepackage[fixlanguage]{babelbib}
+\selectbiblanguage{ngerman}
+
+% Nicer looking fonts
+\usepackage[T1]{fontenc}
+
+% Farben
+\usepackage{color}
+
+% Conditionals
+% See ftp://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/xifthen/xifthen.pdf
+\usepackage{xifthen}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+% Document info vars
+\newcommand{\diplfirstname}{Vorname}
+\newcommand{\diplname}{Name}
+\newcommand{\dipltitle}{Titel}
+\newcommand{\diplsubtitle}{Untertitel}
+\newcommand{\diplsubject}{Masterarbeit}
+
+\definecolor{remcolor}{rgb}{.95,0.35,0.35}
+
+\newcommand{\rem}[1]{\textcolor{remcolor}{\emph{#1}}}
+
+% Hyperref
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\usepackage[
+  pdftex, 
+  pdfpagelabels,
+  colorlinks=false,
+  pdfborder={0 0 0},
+  pdftitle={\dipltitle: \diplsubtitle},
+  pdfauthor={\diplfirstname\ \diplname},
+  pdfsubject={\diplsubject},
+  pdfkeywords={}]{hyperref}
+\else
+\usepackage{graphicx}
+\fi
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{mathtools}
+
+% Abbreviations
+\newcommand{\linenumberstyle}{\scriptsize}
+\newcommand{\lla}{\ensuremath{\longleftarrow}}
+\newcommand{\todo}[1]{\marginline{\footnotesize TODO: #1}}
+\newcommand{\pdfscale}{1.0} % Global scaling factor for included PDF files
+\newcommand{\enlarge}{\enlargethispage{1.5em}}
+
+% Adapt LaTeX defaults
+\linespread{1.4}
+\setlength{\abovecaptionskip}{.5em}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{.2em}
+
+% Adapt KOMA defaults
+\setcapindent{\parindent}
+\setkomafont{captionlabel}{\sffamily\bfseries}
+
+
+% Listings setup
+% See http://ftp.fernuni-hagen.de/ftp-dir/pub/mirrors/www.ctan.org/macros/latex/contrib/listings/listings.pdf
+
+% define json listings
+\lstdefinelanguage{json} {
+  sensitive=false, 
+  morestring=[b]"', 
+  showstringspaces=false
+}
+
+% define turtle listings
+\lstdefinelanguage{turtle} {
+  sensitive=false, 
+  morestring=[b]"', 
+  showstringspaces=true
+}
+
+% define sparql listing
+\lstdefinelanguage{sparql} {
+  sensitive=false, 
+  morestring=[b]"', 
+  showstringspaces=true,
+  backgroundcolor=\color[gray]{1.0},
+  numbers=none,
+  xleftmargin=0pt,
+  xrightmargin=0pt,
+  framexleftmargin=0pt,
+  framexrightmargin=0pt
+}
+
+% set default listing style
+\lstset{
+  language=json, 
+  basicstyle=\small\ttfamily, 
+  captionpos=b, 
+  % keywordstyle=\color[rgb]{0,0,0.7}, 
+  % stringstyle = \color[rgb]{0,0.5,0}, 
+  % identifierstyle=\color{orange}, 
+  commentstyle=\color[gray]{0.5}, 
+  backgroundcolor=\color[gray]{0.96}, 
+  framexleftmargin=1pt,
+  xleftmargin=4.4pt,
+  xrightmargin=3.4pt,
+  numbers=left, 
+  numberstyle=\linenumberstyle, 
+  frame=single, 
+  aboveskip=1.3em
+}
+
+% Algorithms
+% See ftp://ftp.tu-chemnitz.de/pub/tex/macros/latex/contrib/algorithm2e/algorithm2e.pdf
+\usepackage[german, algochapter, boxed, linesnumbered, vlined]{algorithm2e}
+\SetAlCapSkip{.885em}
+\SetNlSkip{1.5em}
+\SetInd{.8em}{.8em}
+\SetNlSty{linenumberstyle}{}{}
+\newcommand{\captionlabel}{\usekomafont{captionlabel}}
+\SetAlTitleFnt{captionlabel}
+
+% Document info
+\titlehead{
+  \begin{center}
+    \textsc{Univeristät Leipzig}\\
+    Fakultät für Mathematik und Informatik\\
+    Institut für Informatik
+  \end{center}
+}
+
+% Generates the title
+\title{%
+\dipltitle\\%
+\bigskip\usekomafont{subtitle}%
+\parbox[h]{0.8\textwidth}{\begin{center}\diplsubtitle\end{center}}%
+}
+
+% Subtitle is abused as type of work
+\subtitle{\usekomafont{subject}\vspace{3em}Diplomarbeit}
+\author{}
+\date{}
+\publishers{
+  \large\parbox{\textwidth}{%
+    % \vspace*{4\baselineskip}
+    Leipzig, März 2011\hfill 
+    vorgelegt von\\
+    \raggedleft
+    \diplname, \diplfirstname\\
+    Studiengang Informatik
+  }
+}
+
+\begin{document}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+% Seitennummerierung auf römisch
+\pagenumbering{roman}
+
+% Titelei
+\maketitle
+
+% Zusammenfassung
+\thispagestyle{empty}
+\section*{Zusammenfassung}
+Hier kommt die Zusammenfassung hin.
+
+\paragraph{Stichworte} Hier ein paar bibliographische Stichworte angeben
+% Verzeichnisse
+\tableofcontents
+\listoffigures
+\listoftables
+\lstlistoflistings
+\listofalgorithms
+
+% Ab nächster Seite
+\clearpage
+% Seitennummerierung auf arabisch
+\pagenumbering{arabic}
+
+% \begin{abstract}
+% \end{abstract}
+
+\chapter{Einleitung}
+\rem{Sehr wichtig. Motivation, Ziele, Aufbau (d. Arbeit).}
+
+\section{Motivation}
+\rem{Was ist der Auslöser, gerade dieses Thema zu bearbeiten?}
+
+\section{Ziele}
+\rem{Was soll die Arbeit leisten?}
+
+\section{Stuktur der Arbeit}
+\rem{Kurzer Überblick über die einzelnen Kapitel.}
+
+\chapter{Grundlagen}\label{chap:grundlagen}
+\rem{Alles, was zum Verständnis der Arbeit wichtig ist \cite{Berners-Lee:2001a}. Nicht zu viele 
+Unterpunkte.}
+
+\chapter{Anforderungen}\label{chap:requirements}
+\rem{Anforderungen definieren, evtl. aus Use-Cases ableiten}
+
+\chapter{Gegenwärtiger Stand der Technik}\label{chap:stateoftheart}
+\rem{Andere vergleichbare Arbeiten auf dem Gebiet, die eventuell einige der 
+Anforderungen bereits erfüllen.}
+
+\chapter{Spezifikation}\label{chap:spezifikation}
+\rem{Beschreibung des zu entwickelnden Systems, 
+UML-Diagramme, versch. Detailierungs\-stufen.}
+
+\chapter{Implementierung}\label{chap:implementierung}
+\rem{Interessante Details aus der Implementierung, außerhalb der Spezifikation.
+Zum Beispiel Screenshots usw.}
+
+\chapter{Evaluation}\label{chap:evaluation}
+\rem{Nachweis, dass die Arbeit die Anforderungen erfüllt.}
+
+\chapter{Zusammenfassung und Ausblick} \label{chap:diskussion}
+\rem{Ebenfalls sehr wichtig.}
+
+% Anhang
+\appendix
+
+% Quellcode
+\chapter{Quellcode des Systems}
+\rem{Quellcode-Link, zum Beispiel zum GitHub-Repo.}
+
+% Literalturverzeichnis
+\bibliography{bibliografie}
+\bibliographystyle{babplain-fl}
+
+% Erklärung
+\clearpage
+\pagestyle{empty}
+\selectlanguage{ngerman}
+\vspace*{1cm}
+\begin{center}
+\textbf{\sffamily Erklärung}
+\end{center}
+\vspace*{0.5cm}
+Ich versichere, dass ich die vorliegende Arbeit selbständig und nur unter Verwendung der angegebenen Quellen und Hilfsmittel angefertigt habe, insbesondere sind wörtliche oder sinngemäße Zitate als solche gekennzeichnet. Mit ist bekannt, dass Zuwiderhandlung auch nachträglich zur Aberkennung des Abschlusses führen kann.
+
+\vspace{2cm}
+\noindent
+Leipzig, 16. März 2011\hfill Unterschrift
+
+\end{document}
